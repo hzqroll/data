@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.roll.data.config.log.LogConfig;
 import com.roll.data.open.WebShenJianShou;
 import com.roll.data.open.service.DataWebService;
 
@@ -30,7 +31,8 @@ public class WebHookController {
 							  @RequestParam("data_key") String data_key,//Webhook调用成功需要返回此值
 							  @RequestParam("pk") String pk) {//数据版本的唯一标识
 		WebShenJianShou webShenJianShou = new WebShenJianShou(url, timestamp, sign2, data, event_type, crawl_time, data_key, pk);
-		System.out.println(webShenJianShou.toString());
+
+		LogConfig.getLoggerInstance().info("get data from shenjianshou: {}.", webShenJianShou.toString());
 		dataWebService.addData(webShenJianShou);
 		return data_key;
 	}
