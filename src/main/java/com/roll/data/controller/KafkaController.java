@@ -18,8 +18,9 @@ public class KafkaController {
 	private ConsumerClient consumerClient;
 
 	@RequestMapping("/send")
-	public void send(@RequestParam("key") String key,
+	public String send(@RequestParam("key") String key,
 					 @RequestParam("value") String value) {
-		consumerClient.send(key, value);
+		//consumerClient.send(key, value);
+		return "okokokok";
 	}
 }
